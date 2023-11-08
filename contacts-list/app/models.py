@@ -12,32 +12,32 @@ class Contact(models.Model):
         return f"{self.name}"
 
 
-def create_contact(name, email, phone, is_favorite):
+def create_contact(name: str, email: str, phone: str, is_favorite: bool) -> object:
     return Contact.objects.create(
         name=name, email=email, phone=phone, is_favorite=is_favorite
     )
 
 
-def all_contacts():
+def all_contacts() -> list:
     return Contact.objects.all()
 
 
-def find_contact_by_name(name):
+def find_contact_by_name(name: str) -> object:
     try:
         return Contact.objects.get(name=name)
     except:
         return None
 
 
-def favorite_contacts():
+def favorite_contacts() -> list:
     return Contact.objects.filter(is_favorite=True)
 
 
-def update_contact_email(name, email):
+def update_contact_email(name: str, email: str) -> None:
     contact = Contact.objects.get(name=name)
     contact.email = email
     contact.save()
 
 
-def delete_contact(name):
+def delete_contact(name: str) -> None:
     Contact.objects.get(name=name).delete()
